@@ -1,0 +1,39 @@
+[project]
+name = "mindora"
+version = "0.1.0"
+description = "Your personal AI wellness coach who grows with you"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastembed>=0.6.0",
+    "langchain>=0.3.20",
+    "langchain-community>=0.3.19",
+    "langchain-groq>=0.2.5",
+    "langchain-ollama>=0.2.3",
+    "langgraph>=0.3.11",
+    "langgraph-checkpoint-sqlite>=2.0.6",
+    "rich>=13.9.4",
+    "sqlite-vec>=0.1.6",
+    "streamlit>=1.43.2",
+    "watchdog>=6.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "loguru>=0.7.3",
+    "pre-commit>=4.1.0",
+    "pytest>=8.3.5",
+    "ruff>=0.11.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "."
+]
+
+[tool.setuptools]
+packages = ["mindora"]
