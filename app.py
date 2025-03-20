@@ -2,10 +2,14 @@ import random
 from typing import List
 
 import streamlit as st
+from dotenv import load_dotenv
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage
 
 from mindora.chatbot import ask_chatbot, chat_workflow
 from mindora.memory import create_memory_manager
+
+load_dotenv()
+
 
 LOADING_MESSAGES = [
     "Taking a deep breath before responding...",
