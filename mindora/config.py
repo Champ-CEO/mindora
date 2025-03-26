@@ -9,7 +9,6 @@ from loguru import logger
 
 
 class ModelProvider(str, Enum):
-    OLLAMA = "ollama"
     GROQ = "groq"
 
 
@@ -20,15 +19,14 @@ class ModelConfig:
     provider: ModelProvider
 
 
-QWEN = ModelConfig("qwen2.5", 0.0, ModelProvider.OLLAMA)
-GEMMA_3 = ModelConfig("gemma3:12b", 0.0, ModelProvider.OLLAMA)
+DEEPSEEK_70B = ModelConfig("deepseek-r1-distill-llama-70b", 0.0, ModelProvider.GROQ)
 LLAMA_3_3 = ModelConfig("llama-3.3-70b-versatile", 0.0, ModelProvider.GROQ)
 
 
 class Config:
     SEED = 42
-    CHAT_MODEL = GEMMA_3
-    TOOL_MODEL = QWEN
+    CHAT_MODEL = LLAMA_3_3  # For general tasks
+    TOOL_MODEL = DEEPSEEK_70B  # For complex tasks
 
     class Path:
         APP_HOME = Path(os.getenv("APP_HOME", Path(__file__).parent.parent))

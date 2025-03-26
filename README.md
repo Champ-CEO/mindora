@@ -9,7 +9,7 @@ Features:
 - Local chatbot that acts as a wellness coach
 - Conversation history stored in database (SQLite)
 - Memory management: remembers user preferences and past interactions
-- Uses Ollama for LLM inference
+- Uses Groq API for LLM inference
 
 ## Workflow components
 
@@ -59,27 +59,9 @@ Install pre-commit hooks:
 uv run pre-commit install
 ```
 
-### Run Ollama
+### Groq API Configuration
 
-Mindora uses Ollama for LLM inference. Watch this video to see how to install Ollama: https://www.youtube.com/watch?v=lmFCVCqOlz8
-
-The chat model we'll use is `gemma3:12b`:
-
-```bash
-ollama pull gemma3:12b
-```
-
-The model for tool calling we'll use is Qwen 2.5 7B:
-
-```bash
-ollama pull qwen2.5
-```
-
-Feel free to experiment with other models.
-
-### (Optional) Groq API
-
-You can also use models from Groq (get your API key from https://console.groq.com/keys).
+Mindora uses Groq API for LLM inference. You'll need to get an API key from [Groq console](https://console.groq.com/keys).
 
 Rename the `.env.example` file to `.env` and add your API key inside:
 
@@ -87,8 +69,17 @@ Rename the `.env.example` file to `.env` and add your API key inside:
 mv .env.example .env
 ```
 
-Look into the [`config.py`](mindora/config.py) file to set your preferred model.
+Edit the `.env` file and set your Groq API key:
 
+```
+GROQ_API_KEY=your_api_key_here
+```
+
+The application uses the following Groq models:
+- Chat model (general tasks): `llama-3.3-70b-versatile`
+- Tool model (complex tasks): `deepseek-r1-distill-llama-70b`
+
+These settings can be adjusted in the [`config.py`](mindora/config.py) file if needed.
 
 ## Run the Streamlit app
 
@@ -96,4 +87,3 @@ Run the app:
 
 ```bash
 streamlit run app.py
-```

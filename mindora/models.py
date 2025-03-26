@@ -3,7 +3,6 @@ from functools import lru_cache
 from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_groq import ChatGroq
-from langchain_ollama import ChatOllama
 
 from mindora.config import Config, ModelConfig, ModelProvider
 
@@ -14,12 +13,5 @@ def create_embeddings() -> FastEmbedEmbeddings:
 
 
 def create_llm(model_config: ModelConfig) -> BaseChatModel:
-    if model_config.provider == ModelProvider.OLLAMA:
-        return ChatOllama(
-            model=model_config.name,
-            temperature=model_config.temperature,
-            verbose=False,
-            keep_alive=-1,
-        )
-    elif model_config.provider == ModelProvider.GROQ:
+    if model_config.provider == ModelProvider.GROQ:
         return ChatGroq(model=model_config.name, temperature=model_config.temperature)
